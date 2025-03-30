@@ -8,7 +8,7 @@ class Controller:
         # the model, which implements the logic of the program and holds the data
         self._model = model
 
-    def handle_hello(self, e):
+    def handle_registered(self, e):
         """Simple function to handle a button-pressed event,
         and consequently print a message on screen"""
         name = self._view.txt_name.value
@@ -17,6 +17,3 @@ class Controller:
             return
         self._view.txt_result.controls.append(ft.Text(f"Hello, {name}!"))
         self._view.update_page()
-
-
-

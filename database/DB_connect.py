@@ -1,12 +1,10 @@
 import mysql.connector
 from mysql.connector import errorcode
 
-
 def get_connection() -> mysql.connector.connection:
     try:
         cnx = mysql.connector.connect(
-            option_files='./database/connector.cnf'
-        )
+            option_files='D:/Windows Folders/Documenti/PycharmProjects/TdP-Lab05/database/connector.cnf')
         return cnx
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -19,6 +17,6 @@ def get_connection() -> mysql.connector.connection:
             print(err)
             return None
 
-
+get_connection()
 class DBConnect:
     pass

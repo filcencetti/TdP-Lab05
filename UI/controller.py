@@ -1,5 +1,5 @@
 import flet as ft
-
+import model.studente as s
 
 class Controller:
     def __init__(self, view, model):
@@ -17,3 +17,6 @@ class Controller:
             return
         self._view.txt_result.controls.append(ft.Text(f"Hello, {name}!"))
         self._view.update_page()
+
+
+

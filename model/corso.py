@@ -1,3 +1,6 @@
-class Corso:
+from database import corso_DAO
+
+
+class Course:
     def __init__(self):
-        pass
+        self.list_courses = corso_DAO.addcourses()

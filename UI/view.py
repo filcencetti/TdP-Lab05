@@ -13,7 +13,6 @@ class View(ft.UserControl):
         # graphical elements
         self._title = None
         self.txt_name = None
-        self.btn_hello = None
         self.txt_result = None
         self.txt_container = None
         self._matr = None
@@ -31,15 +30,12 @@ class View(ft.UserControl):
         self.txt_name = ft.Dropdown(
             label="Corso",
             width=500,
-            hint_text="Selezionare un corso",
-            options=[]
-        )
+            hint_text="Selezionare un corso")
 
         # button for the "hello" reply
         self.btn_SearchRegistered = ft.ElevatedButton(text="Cerca iscritti", on_click=self._controller.handle_registered)
-        row1 = ft.Row([self.txt_name, self.btn_hello],
-                      alignment=ft.MainAxisAlignment.CENTER)
-        self._page.controls.append(row1)
+        row1 = ft.Row([self.txt_name, self.btn_SearchRegistered], alignment=ft.MainAxisAlignment.CENTER)
+        self._page.add(row1)
         self._page.update()
 
         # row2

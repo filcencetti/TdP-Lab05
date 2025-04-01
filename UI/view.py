@@ -12,7 +12,7 @@ class View(ft.UserControl):
         self._controller = None
         # graphical elements
         self._title = None
-        self.txt_name = None
+        self.txt_course_name = None
         self.txt_result = None
         self.txt_container = None
         self._matr = None
@@ -27,15 +27,16 @@ class View(ft.UserControl):
 
         #ROW with some controls
         # text field for the name
-        self.txt_name = ft.Dropdown(
+        self.txt_course_name = ft.Dropdown(
             label="Corso",
             width=500,
             hint_text="Selezionare un corso")
 
-        # button for the "hello" reply
-        self.btn_SearchRegistered = ft.ElevatedButton(text="Cerca iscritti", on_click=self._controller.handle_registered)
-        row1 = ft.Row([self.txt_name, self.btn_SearchRegistered], alignment=ft.MainAxisAlignment.CENTER)
-        self._page.add(row1)
+        self._controller.addcourses()
+
+        self.btn_SearchRegistered = ft.ElevatedButton(text="Cerca iscritti",on_click=lambda e: self._controller.printstudents())
+        row1 = ft.Row([self.txt_course_name, self.btn_SearchRegistered], alignment=ft.MainAxisAlignment.CENTER)
+        self._page.controls.append(row1)
         self._page.update()
 
         # row2
@@ -50,20 +51,19 @@ class View(ft.UserControl):
         self._page.update()
 
         # row3
-        self._btnSearchStudent = ft.ElevatedButton(text="Cerca studente")
-        self._btnSearchCourse = ft.ElevatedButton(text="Cerca corsi",
-                                                  )
-        self._btnRegister = ft.ElevatedButton(text="Iscriviti")
+        self._btnSearchStudent = ft.ElevatedButton(text="Cerca studente",on_click=lambda e: self._controller.searchstudent())
+        self._btnSearchCourse = ft.ElevatedButton(text="Cerca corsi",on_click=lambda e: self._controller.searchcourses())
+        self._btnRegister = ft.ElevatedButton(text="Iscriviti",on_click=lambda e: self._controller.register())
         row3 = ft.Row(controls=[self._btnSearchStudent, self._btnSearchCourse, self._btnRegister],
                       alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row3)
         self._page.update()
 
-
         # List View where the reply is printed
-        self.txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
+        self.txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
         self._page.controls.append(self.txt_result)
         self._page.update()
+
 
     @property
     def controller(self):

@@ -22,7 +22,7 @@ def addstudent(matr,course):
         "values (%s,%s)")
 
         cursor.execute(query,
-                       (int(matr),course))
+                       (matr,course))
         cnx.commit()
         cnx.close()
         return

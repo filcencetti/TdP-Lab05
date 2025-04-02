@@ -11,6 +11,6 @@ class Model:
         self.coursestudent = []
 
     def register_new_course(self):
-        addstudent(self.registrations.new_matr,self.registrations.new_course)
+        addstudent(int(self.registrations.new_matr),self.registrations.new_course)
 
 

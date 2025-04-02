@@ -10,10 +10,20 @@ class Controller:
     def handle_registered(self):
         """Simple function to handle a button-pressed event,
         and consequently print a message on screen"""
+        self.val = True
         course_name = self._view.txt_course_name.value
         if course_name is None or course_name == "":
             self._view.create_alert("Inserire il corso!")
             self._view._page.update()
+            self.val = False
+            return
+
+    def handle_matr(self):
+        self.val = True
+        if self._view._matr.value is None or self._view._matr.value == "":
+            self._view.create_alert("Inserire la matricola!")
+            self._view.update_page()
+            self.val = False
             return
 
     def printstudents(self):
@@ -40,7 +50,8 @@ class Controller:
         if self._view._matr.value is None or self._view._matr.value == "":
             self._view.create_alert("Inserire la matricola!")
             self._view.update_page()
-            return
+
+
         for registration in self._model.registrations.list_registrations:
             if self._view.txt_course_name.value == registration["codins"]:
                 for student in self._model.students:
@@ -55,10 +66,6 @@ class Controller:
         self._view.update_page()
 
     def searchcourses(self):
-        if self._view._matr.value is None or self._view._matr.value == "":
-            self._view.create_alert("Inserire la matricola!")
-            self._view.update_page()
-            return
         self._view.txt_result.controls = []
         for registration in self._model.registrations.list_registrations:
             if self._view._matr.value == str(registration["matricola"]):
@@ -73,6 +80,11 @@ class Controller:
         return
 
     def register(self):
-        self._model.registrations.new_matr = self._view._matr.value
-        self._model.registrations.new_course = self._view.txt_course_name.value
-        self._model.register_new_course()
+        self.val = True
+        self.handle_registered()
+        self.handle_matr()
+        print(self.val)
+        if self.val:
+            self._model.registrations.new_matr = self._view._matr.value
+            self._model.registrations.new_course = self._view.txt_course_name.value
+            self._model.register_new_course()
